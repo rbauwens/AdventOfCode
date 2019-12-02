@@ -1,5 +1,5 @@
 import unittest
-from days.day_one_part_one import compute_fuel, compute_sum_fuel, compute_fuel_recursive, compute_sum_fuel_recursive
+from days.day_one import compute_fuel, compute_sum_fuel, compute_fuel_recursive, compute_sum_fuel_recursive
 
 
 class PartOne(unittest.TestCase):

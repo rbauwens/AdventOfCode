@@ -4,7 +4,7 @@ import math
 
 ROOT_FOLDER = os.path.dirname(os.path.dirname(__file__))
 DATA_FOLDER = os.path.join(ROOT_FOLDER, 'data')
-DATA_FILE = os.path.join(DATA_FOLDER, 'dayonepartone_data')
+DATA_FILE = os.path.join(DATA_FOLDER, 'day_one_data')
 EXPECTED_LINES = 100
 
 
@@ -36,7 +36,6 @@ def get_masses():
             masses_from_file.append(int(line.strip()))
             line = fp.readline()
             lines_read += 1
-
 
     if (lines_read != EXPECTED_LINES + 1):
         sys.exit("Did not read the correct amount of lines")
