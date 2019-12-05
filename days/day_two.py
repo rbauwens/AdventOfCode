@@ -34,8 +34,10 @@ def opcode(array):
 
         if operation == 1:
             result = num1 + num2
+            jump = 4
         elif operation == 2:
             result = num1 * num2
+            jump = 4
         else:
             return [0], "Invalid operation code"
             #sys.exit("Invalid operation code")
