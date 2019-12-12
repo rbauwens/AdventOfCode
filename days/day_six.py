@@ -93,9 +93,6 @@ def part_two():
 
     with open(DATA_FILE, "r") as f:
         input_data = f.read()
-
-    # expected_orbit = return_orbit_part_two(input_data)
-    # my_orbit = Orbits(expected_orbit)
     part_two = calculate_part_two(input_data)
     
 
@@ -104,25 +101,3 @@ def part_two():
 ans = part_two()
 print(ans)
 
-#not51
-# with open(DATA_FILE, "r") as f:
-#     input_data = f.read()
-# parent = defaultdict(str)
-
-# for rel in input_data.split("\n"):
-#     obj, orbit = rel.split(")")
-#     parent[orbit] = obj
-
-
-# def get_orbits(name):
-#     while (name := parent[name]) :
-#         yield name
-
-
-# from_you = list(get_orbits("YOU"))
-# from_san = list(get_orbits("SAN"))
-
-# common = set(from_you).intersection(set(from_san))
-
-# part_two = min(from_you.index(a) + from_san.index(a) for a in common)
-# print(part_two)
