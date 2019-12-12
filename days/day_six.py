@@ -1,55 +1,42 @@
 import math 
-
-ORBITS = dict()
-
-def get_orbit(orbit):
-    focus = orbit.split(")")[0]
-    orbiter = orbit.split(")")[1]
-    if focus in ORBITS:
-        ORBITS[focus].append(orbiter)
-    else:
-        ORBITS[focus] = [orbiter]
+from collections import defaultdict
 
 
-def num_orbits(focus, num_orbiters, end):
-    if focus in ORBITS and end != 1:
-        orbiters = ORBITS[focus]
-        num_orbiters = num_orbiters + len(ORBITS[focus])
-        new_orbits = 0
-        for object in orbiters:
-            new_orbits, end = num_orbits(object, num_orbiters, end)
-            if end == 1:
-                return num_orbiters, 1
-        # num_orbiters = num_orbiters + new_orbits
-    return num_orbiters, 1
 
-def num_orbits1(orbits, focus, num_orb):
-    # if focus not in orbits:
-    #     return None
-    # else:
-    new = 0
-    for tmp in orbits[focus]:
-        num_orb = num_orb + 1
-        if tmp not in orbits:
-            return -999, num_orb
-        while tmp in orbits and new != -999:
-            new, num_orb = num_orbits1(orbits, tmp, num_orb)
-            if new != -999:
-                num_orb = num_orb + new
-    return 0, num_orb
+def return_orbit(orbit):
+    lines = orbit.split('\n')
+    orbit_dict = defaultdict(list)
+    for line in lines:
+        focus = line.split(")")[0].strip()
+        orbiter = line.split(")")[1].strip()
+        
+        orbit_dict[focus].append(orbiter)
+    return orbit_dict
 
 
-print(ORBITS)
-get_orbit("A)B")
-print(ORBITS)
-get_orbit("B)C")
-print(ORBITS)
 
-values = []
-for focus in ORBITS:
-    print("focus: {}".format(focus))
-    values.append(num_orbits(focus, 0, 0)[0])
+def calculate_part_one(my_orbit):
+    direct_count = my_orbit.count_direct("COM")
+    indirect_count = 0
 
-print(values)
-print(sum(values))
+    for name in my_orbit.ORBIT:
+        if name != "COM":
+            indirect_count += my_orbit.count_direct(name)
+
+    part_one = direct_count + indirect_count
+    return part_one
+
+class Orbits:
+    
+    def __init__(self, orbit):
+        self.ORBIT = orbit  
+
+    def count_direct(self, name):
+        # my_sum = sum(self.count_direct(n) for n in self.ORBIT[name])
+        loc = 0
+        for n in self.ORBIT[name]:
+            loc = loc + self.count_direct(n)
+        return len(self.ORBIT[name])  + loc
+
+
 
